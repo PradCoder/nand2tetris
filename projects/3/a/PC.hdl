@@ -14,5 +14,11 @@ CHIP PC {
     OUT out[16];
     
     PARTS:
-    //// Replace this comment with your code.
+    Inc16(in=t1 , out=inced );
+    //So I had to work it backwards?? That's weird
+    Mux16(a=t1 , b=inced , sel=inc , out= o1);
+    Mux16(a=o1 , b=in , sel=load , out= o2);
+    Mux16(a=o2 , b=false , sel=reset , out=o3 );
+    Register(in=o3 , load=true , out=out, out=t1 );
 }
+
